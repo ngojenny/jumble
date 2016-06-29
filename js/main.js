@@ -98,6 +98,8 @@ jumbleApp.onTimer = function() {
 	})
 }
 
+// testing git
+
 $(document).ready(function(){
 	jumbleApp.init();
 	jumbleApp.onTimer();
