@@ -78,7 +78,20 @@ jumbleApp.compare = function() {
 	$('form.userAnswers').on('submit', function(e){
 		e.preventDefault();
 		var usersInput = $('input[type=text]').val();
+		var answerKeyDiv = document.getElementById('answerKey');
+		var answerKey = answerKeyDiv.innerHTML;
+		var usersScore = 0;
+
+		console.log(answerKey)
+		if (usersInput === answerKey) {
+			usersScore = usersScore + 1;
+		} else {
+			console.log('try again')
+		}
+
+		$('input[type=text]').val('');
 		console.log(usersInput);
+		console.log(usersScore);
 	});
 }
 
@@ -86,7 +99,7 @@ jumbleApp.compare = function() {
 jumbleApp.onTimer = function() {
 	$('.playBtn').on('click', function(){
 		// jumbleApp.onTimer();
-		var seconds = 60;
+		var seconds = 30;
 		var countdown = window.setInterval(function(){
 			$('span').html(seconds);
 			seconds = seconds - 1;
@@ -97,8 +110,6 @@ jumbleApp.onTimer = function() {
 		}, 1000);
 	})
 }
-
-// testing git
 
 $(document).ready(function(){
 	jumbleApp.init();
