@@ -46,6 +46,10 @@ jumbleApp.displayArray = function(scrambledWordsArray) {
 		nextElement();
 	});
 
+	$('#userAnswersForm').on('submit', function(){
+		nextElement();
+	});
+
 	function nextElement() {
 		print.innerHTML = scrambledWordsArray[i];
 		i = (i + 1)%(scrambledWordsArray.length);
@@ -64,23 +68,29 @@ jumbleApp.unscrambled = function(shuffledArray) {
 		returnNextElement();
 	});
 
+	jumbleApp.compare(shuffledArray);
+	$('#userAnswersForm').on('submit', function(){
+		returnNextElement();
+	});
+
 	function returnNextElement() {
 		i = (i + 1)%(shuffledArray.length);
 		$('#answerKey').empty();
 		$('#answerKey').append(shuffledArray[i]);
 	}
-	jumbleApp.compare();
 }
 
 
+var usersScore = 0;
+
 //store users' answers in a variable
-jumbleApp.compare = function() {
+//if users score matches answer key add points to their total
+jumbleApp.compare = function(shuffled) {
 	$('form.userAnswers').on('submit', function(e){
 		e.preventDefault();
 		var usersInput = $('input[type=text]').val();
 		var answerKeyDiv = document.getElementById('answerKey');
 		var answerKey = answerKeyDiv.innerHTML;
-		var usersScore = 0;
 
 		console.log(answerKey)
 		if (usersInput === answerKey) {
@@ -95,11 +105,12 @@ jumbleApp.compare = function() {
 	});
 }
 
+
 //create a 1 minute timer
 jumbleApp.onTimer = function() {
 	$('.playBtn').on('click', function(){
 		// jumbleApp.onTimer();
-		var seconds = 30;
+		var seconds = 60;
 		var countdown = window.setInterval(function(){
 			$('span').html(seconds);
 			seconds = seconds - 1;
