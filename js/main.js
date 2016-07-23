@@ -101,10 +101,15 @@ jumbleApp.compare = function(shuffled) {
 
 		$('input[type=text]').val('');
 		console.log(usersInput);
-		console.log(usersScore);
+		jumbleApp.displayUsersScore(usersScore);
 	});
 }
 
+//display user's score on the page
+jumbleApp.displayUsersScore = function(usersScore) {
+	console.log(usersScore);
+	$('span.score').text(usersScore);
+}
 
 //create a 1 minute timer
 jumbleApp.onTimer = function() {
@@ -119,7 +124,7 @@ jumbleApp.onTimer = function() {
 				// alert('Times Up!');
 			}
 		}, 1000);
-	})
+	});
 }
 
 $(document).ready(function(){
