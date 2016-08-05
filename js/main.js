@@ -57,27 +57,28 @@ jumbleApp.displayArray = function(scrambledWordsArray) {
 }
 
 
+var shuffledArrayIndex = 0;
 //create a function that shows/stores the unscrambled word
 jumbleApp.unscrambled = function(shuffledArray) {
-	var i = 0;
-	var print = document.getElementById('outPut');
 
 	$('#answerKey').append(shuffledArray[0]);
 
 	$('.nxtBtn').on('click', function(){
-		returnNextElement();
+		jumbleApp.returnNextElement(shuffledArray);
 	});
 
 	jumbleApp.compare(shuffledArray);
-	$('#userAnswersForm').on('submit', function(){
-		returnNextElement();
-	});
 
-	function returnNextElement() {
-		i = (i + 1)%(shuffledArray.length);
-		$('#answerKey').empty();
-		$('#answerKey').append(shuffledArray[i]);
-	}
+	$('#userAnswersForm').on('submit', function(){
+		jumbleApp.returnNextElement(shuffledArray);
+	});
+}
+
+jumbleApp.returnNextElement = function(shuffledArray) {
+	shuffledArrayIndex = (shuffledArrayIndex + 1)%(shuffledArray.length);
+	$('#answerKey').empty();
+	$('#answerKey').append(shuffledArray[shuffledArrayIndex]);
+
 }
 
 
@@ -96,7 +97,7 @@ jumbleApp.compare = function(shuffled) {
 		if (usersInput === answerKey) {
 			usersScore = usersScore + 1;
 		} else {
-			console.log('try again')
+			console.log('try again')	
 		}
 
 		$('input[type=text]').val('');
