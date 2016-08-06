@@ -34,26 +34,38 @@ jumbleApp.shuffleCharacters = function(shuffledArray) {
 	jumbleApp.unscrambled(shuffledArray);
 }
 
-
+var scrambledWordsArrayIndex = 0;
 //create a function at puts the iterates through the array and pulls out the first item and displays it on the page
 jumbleApp.displayArray = function(scrambledWordsArray) {
 	// console.log(scrambledWordsArray[i]);
-	var i = 1;
-	var print = document.getElementById('outPut');
-	print.innerHTML = scrambledWordsArray[0];
+	// var i = 0;
+
+	$('#outPut').append(scrambledWordsArray[0]);
 
 	$('.nxtBtn').on('click', function(){
-		nextElement();
+		jumbleApp.nextElement(scrambledWordsArray);
 	});
 
-	$('#userAnswersForm').on('submit', function(){
-		nextElement();
+	$('#userAnswersForm').on('submit', function(e){
+		e.preventDefault();
+		var usersInput = $('input[type=text]').val();
+		var answerKeyDiv = document.getElementById('answerKey');
+		var answerKey = answerKeyDiv.innerHTML;
+
+		if (usersInput === answerKey) {
+			jumbleApp.nextElement(scrambledWordsArray);
+		} else {
+			return false
+			console.log('try again')
+		}
 	});
 
-	function nextElement() {
-		print.innerHTML = scrambledWordsArray[i];
-		i = (i + 1)%(scrambledWordsArray.length);
-	}
+}
+
+jumbleApp.nextElement = function(scrambledWordsArray) {
+	scrambledWordsArrayIndex = scrambledWordsArrayIndex + 1;
+	$('#outPut').empty();
+	$('#outPut').append(scrambledWordsArray[scrambledWordsArrayIndex]);
 }
 
 
@@ -67,18 +79,29 @@ jumbleApp.unscrambled = function(shuffledArray) {
 		jumbleApp.returnNextElement(shuffledArray);
 	});
 
-	jumbleApp.compare(shuffledArray);
 
-	$('#userAnswersForm').on('submit', function(){
-		jumbleApp.returnNextElement(shuffledArray);
+	$('#userAnswersForm').on('submit', function(e){
+		e.preventDefault();
+		var usersInput = $('input[type=text]').val();
+		var answerKeyDiv = document.getElementById('answerKey');
+		var answerKey = answerKeyDiv.innerHTML;
+		
+		if (usersInput === answerKey) {
+			jumbleApp.returnNextElement(shuffledArray);
+			jumbleApp.compare(shuffledArray);
+			$('input[type=text]').val('');
+		} else {
+			$('input[type=text]').val('');
+			return false
+			console.log('try again')
+		}
 	});
 }
 
 jumbleApp.returnNextElement = function(shuffledArray) {
-	shuffledArrayIndex = (shuffledArrayIndex + 1)%(shuffledArray.length);
+	shuffledArrayIndex = shuffledArrayIndex + 1;
 	$('#answerKey').empty();
 	$('#answerKey').append(shuffledArray[shuffledArrayIndex]);
-
 }
 
 
@@ -87,23 +110,13 @@ var usersScore = 0;
 //store users' answers in a variable
 //if users score matches answer key add points to their total
 jumbleApp.compare = function(shuffled) {
-	$('form.userAnswers').on('submit', function(e){
-		e.preventDefault();
-		var usersInput = $('input[type=text]').val();
-		var answerKeyDiv = document.getElementById('answerKey');
-		var answerKey = answerKeyDiv.innerHTML;
-
-		console.log(answerKey)
-		if (usersInput === answerKey) {
+	var usersInput = $('input[type=text]').val();
+	var answerKeyDiv = document.getElementById('answerKey');
+	var answerKey = answerKeyDiv.innerHTML;
 			usersScore = usersScore + 1;
-		} else {
-			console.log('try again')	
-		}
-
-		$('input[type=text]').val('');
-		console.log(usersInput);
-		jumbleApp.displayUsersScore(usersScore);
-	});
+		
+	console.log(usersInput);
+	jumbleApp.displayUsersScore(usersScore);
 }
 
 //display user's score on the page
@@ -118,7 +131,7 @@ jumbleApp.onTimer = function() {
 		// jumbleApp.onTimer();
 		var seconds = 60;
 		var countdown = window.setInterval(function(){
-			$('span').html(seconds);
+			$('.seconds').html(seconds);
 			seconds = seconds - 1;
 			if(seconds < 0) {
 				window.clearInterval(countdown);
