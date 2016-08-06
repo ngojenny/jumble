@@ -30,20 +30,20 @@ jumbleApp.shuffleCharacters = function(shuffledArray) {
 	});
 
 	console.log(scrambledWordsArray);
-	jumbleApp.displayArray(scrambledWordsArray);
-	jumbleApp.unscrambled(shuffledArray);
+	jumbleApp.displayJumbledWordsArray(scrambledWordsArray);
+	jumbleApp.displayUnjumbledWordsArray(shuffledArray);
 }
 
 var scrambledWordsArrayIndex = 0;
 //create a function at puts the iterates through the array and pulls out the first item and displays it on the page
-jumbleApp.displayArray = function(scrambledWordsArray) {
+jumbleApp.displayJumbledWordsArray = function(scrambledWordsArray) {
 	// console.log(scrambledWordsArray[i]);
 	// var i = 0;
 
 	$('#outPut').append(scrambledWordsArray[0]);
 
 	$('.nxtBtn').on('click', function(){
-		jumbleApp.nextElement(scrambledWordsArray);
+		jumbleApp.nextJumbledPrompt(scrambledWordsArray);
 	});
 
 	$('#userAnswersForm').on('submit', function(e){
@@ -53,7 +53,7 @@ jumbleApp.displayArray = function(scrambledWordsArray) {
 		var answerKey = answerKeyDiv.innerHTML;
 
 		if (usersInput === answerKey) {
-			jumbleApp.nextElement(scrambledWordsArray);
+			jumbleApp.nextJumbledPrompt(scrambledWordsArray);
 		} else {
 			return false
 			console.log('try again')
@@ -62,7 +62,7 @@ jumbleApp.displayArray = function(scrambledWordsArray) {
 
 }
 
-jumbleApp.nextElement = function(scrambledWordsArray) {
+jumbleApp.nextJumbledPrompt = function(scrambledWordsArray) {
 	scrambledWordsArrayIndex = scrambledWordsArrayIndex + 1;
 	$('#outPut').empty();
 	$('#outPut').append(scrambledWordsArray[scrambledWordsArrayIndex]);
@@ -71,12 +71,12 @@ jumbleApp.nextElement = function(scrambledWordsArray) {
 
 var shuffledArrayIndex = 0;
 //create a function that shows/stores the unscrambled word
-jumbleApp.unscrambled = function(shuffledArray) {
+jumbleApp.displayUnjumbledWordsArray = function(shuffledArray) {
 
 	$('#answerKey').append(shuffledArray[0]);
 
 	$('.nxtBtn').on('click', function(){
-		jumbleApp.returnNextElement(shuffledArray);
+		jumbleApp.nextAnswerKey(shuffledArray);
 	});
 
 
@@ -87,8 +87,8 @@ jumbleApp.unscrambled = function(shuffledArray) {
 		var answerKey = answerKeyDiv.innerHTML;
 		
 		if (usersInput === answerKey) {
-			jumbleApp.returnNextElement(shuffledArray);
-			jumbleApp.compare(shuffledArray);
+			jumbleApp.nextAnswerKey(shuffledArray);
+			jumbleApp.addPoints(shuffledArray);
 			$('input[type=text]').val('');
 		} else {
 			$('input[type=text]').val('');
@@ -98,7 +98,7 @@ jumbleApp.unscrambled = function(shuffledArray) {
 	});
 }
 
-jumbleApp.returnNextElement = function(shuffledArray) {
+jumbleApp.nextAnswerKey = function(shuffledArray) {
 	shuffledArrayIndex = shuffledArrayIndex + 1;
 	$('#answerKey').empty();
 	$('#answerKey').append(shuffledArray[shuffledArrayIndex]);
@@ -109,13 +109,13 @@ var usersScore = 0;
 
 //store users' answers in a variable
 //if users score matches answer key add points to their total
-jumbleApp.compare = function(shuffled) {
+jumbleApp.addPoints = function(shuffled) {
 	var usersInput = $('input[type=text]').val();
 	var answerKeyDiv = document.getElementById('answerKey');
 	var answerKey = answerKeyDiv.innerHTML;
-			usersScore = usersScore + 1;
-		
+			usersScore = usersScore + 1;	
 	console.log(usersInput);
+
 	jumbleApp.displayUsersScore(usersScore);
 }
 
