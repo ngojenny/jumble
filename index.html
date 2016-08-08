@@ -4,24 +4,41 @@
 	<meta charset="UTF-8">
 	<title>Jumble | Unscramble Words for Funsies</title>
 	<style>
-		.seconds {
-      font-size: 350px;
-      color:black;
-      text-shadow:5px 5px 0 rgba(0,0,0,0.05);
-      -webkit-transition:all 0.3s;
+	.seconds {
+	     font-size: 350px;
+	     color:black;
+	     text-shadow:5px 5px 0 rgba(0,0,0,0.05);
+	     -webkit-transition:all 0.3s;
     }
+	
+	.promptUser {
+		border: 2px solid red;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+
 	</style>
 </head>
 <body>
 	<div id="outPut">
 		
 	</div>
+
 	<div id="answerKey"></div>
+
 	<form class="userAnswers" action="" id="userAnswersForm">
 		<input type="text">
 	</form>
+
 	<button class="nxtBtn">Skip</button>
-	<button class="playBtn">Play</button>
+
+	<div class="promptUser" id="promptUser">
+		<p>Ready to play? How many words can you unjumble before the clock runs out? Type in the correct word and press enter!</p>
+		<p>Click skip if you're stuck, but try not to do it too much (you lose points whenever you skip)</p>
+		<button class="playBtn">Play</button>
+	</div>
 	
 	<div class="usersScore">
 		<p>Score: <span class="score">0</span></p>

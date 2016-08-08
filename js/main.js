@@ -18,8 +18,9 @@ var levelOne = ['ketchup', 'grape', 'bread', 'apple', 'pickle', 'cider', 'cookie
 // var levelTwo = ['usa', 'canada', 'spain', 'france', 'brazil', 'mexico'];
 
 currentLevel = levelOne;
-
 console.log(currentLevel);
+
+
 //create a function that shuffles the array
 jumbleApp.jumbleWordArray = function() {
 	var shuffledArray = _.shuffle(currentLevel);
@@ -142,6 +143,11 @@ jumbleApp.displayUsersScore = function(usersScore) {
 jumbleApp.onTimer = function() {
 	$('.playBtn').on('click', function(){
 		// jumbleApp.onTimer();
+		var node = document.getElementById('promptUser');
+		if(node.parentNode) {
+			node.parentNode.removeChild(node);
+		}
+
 		var seconds = 60;
 		var countdown = window.setInterval(function(){
 			$('.seconds').html(seconds);
