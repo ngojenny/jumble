@@ -9,15 +9,20 @@ jumbleApp.init = function() {
 	jumbleApp.jumbleWordArray();
 }
 
-//create an array of words
+//create an arrays of words that represents different levels of game
 
+var currentLevel = [];
 
 var levelOne = ['ketchup', 'grape', 'bread', 'apple', 'pickle', 'cider', 'cookies', 'chocolate', 'ramen', 'spinach', 'carrot', 'broccoli', 'pear'];
 
-console.log(levelOne);
+// var levelTwo = ['usa', 'canada', 'spain', 'france', 'brazil', 'mexico'];
+
+currentLevel = levelOne;
+
+console.log(currentLevel);
 //create a function that shuffles the array
 jumbleApp.jumbleWordArray = function() {
-	var shuffledArray = _.shuffle(levelOne);
+	var shuffledArray = _.shuffle(currentLevel);
 	console.log(shuffledArray);
 
 	jumbleApp.shuffleCharacters(shuffledArray);
@@ -26,7 +31,7 @@ jumbleApp.jumbleWordArray = function() {
 //create a function that shuffles the characters for each item in the array
 jumbleApp.shuffleCharacters = function(shuffledArray) {
 	var scrambledWordsArray = shuffledArray.map(function(individualWord) {
-		return _.shuffle(individualWord);
+		return _.shuffle(_.shuffle(individualWord));
 	});
 
 	console.log(scrambledWordsArray);
@@ -40,6 +45,7 @@ jumbleApp.displayJumbledWordsArray = function(scrambledWordsArray) {
 	// console.log(scrambledWordsArray[i]);
 	// var i = 0;
 
+	// $('#outPut').html('<span class="tile">' +scrambledWordsArray[0] + '</span>');
 	$('#outPut').append(scrambledWordsArray[0]);
 
 	$('.nxtBtn').on('click', function(){
@@ -66,6 +72,13 @@ jumbleApp.nextJumbledPrompt = function(scrambledWordsArray) {
 	scrambledWordsArrayIndex = scrambledWordsArrayIndex + 1;
 	$('#outPut').empty();
 	$('#outPut').append(scrambledWordsArray[scrambledWordsArrayIndex]);
+	if(scrambledWordsArrayIndex === scrambledWordsArray.length){
+		alert('congrats! ready for the next level?');
+		// currentLevel = levelTwo;
+		// jumbleApp.jumbleWordArray();
+	} else {
+
+	}
 }
 
 
@@ -113,7 +126,7 @@ jumbleApp.addPoints = function(shuffled) {
 	var usersInput = $('input[type=text]').val();
 	var answerKeyDiv = document.getElementById('answerKey');
 	var answerKey = answerKeyDiv.innerHTML;
-			usersScore = usersScore + 1;	
+			usersScore = usersScore + 10;	
 	console.log(usersInput);
 
 	jumbleApp.displayUsersScore(usersScore);
