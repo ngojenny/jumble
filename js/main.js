@@ -13,7 +13,7 @@ jumbleApp.init = function() {
 
 var currentLevel = [];
 
-var levelOne = ['ketchup', 'grape', 'bread', 'apple', 'pickle', 'cider', 'cookies', 'chocolate', 'ramen', 'spinach', 'carrot', 'broccoli', 'pear'];
+var levelOne = ['ketchup', 'grape', 'bread', 'apple', 'pickle', 'cider', 'cookies', 'chocolate', 'ramen', 'spinach', 'carrot', 'broccoli', 'pear', 'mango', 'eggs', 'pizza', 'mustard', 'candy', 'muffin', 'bacon', 'rice', 'kale'];
 
 // var levelTwo = ['usa', 'canada', 'spain', 'france', 'brazil', 'mexico'];
 
@@ -66,6 +66,9 @@ jumbleApp.displayJumbledWordsArray = function(scrambledWordsArray) {
 			console.log('try again')
 		}
 	});
+	$('.nxtBtn').on('click', function(){
+		jumbleApp.subtractPoints();
+	});
 
 }
 
@@ -81,7 +84,6 @@ jumbleApp.nextJumbledPrompt = function(scrambledWordsArray) {
 
 	}
 }
-
 
 var shuffledArrayIndex = 0;
 //create a function that shows/stores the unscrambled word
@@ -123,11 +125,25 @@ var usersScore = 0;
 
 //store users' answers in a variable
 //if users score matches answer key add points to their total
-jumbleApp.addPoints = function(shuffled) {
+jumbleApp.addPoints = function() {
 	var usersInput = $('input[type=text]').val();
 	var answerKeyDiv = document.getElementById('answerKey');
 	var answerKey = answerKeyDiv.innerHTML;
-			usersScore = usersScore + 10;	
+	
+	usersScore = usersScore + 10;	
+	
+	console.log(usersInput);
+
+	jumbleApp.displayUsersScore(usersScore);
+}
+
+jumbleApp.subtractPoints = function() {
+	var usersInput = $('input[type=text]').val();
+	var answerKeyDiv = document.getElementById('answerKey');
+	var answerKey = answerKeyDiv.innerHTML;
+	
+	usersScore = usersScore - 5;	
+	
 	console.log(usersInput);
 
 	jumbleApp.displayUsersScore(usersScore);
