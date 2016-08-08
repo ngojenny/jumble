@@ -32,7 +32,8 @@ jumbleApp.jumbleWordArray = function() {
 //create a function that shuffles the characters for each item in the array
 jumbleApp.shuffleCharacters = function(shuffledArray) {
 	var scrambledWordsArray = shuffledArray.map(function(individualWord) {
-		return _.shuffle(_.shuffle(individualWord));
+		var shuffledOnce = _.shuffle(individualWord)
+		return _.shuffle(shuffledOnce);
 	});
 
 	console.log(scrambledWordsArray);
@@ -108,6 +109,7 @@ jumbleApp.displayUnjumbledWordsArray = function(shuffledArray) {
 			$('input[type=text]').val('');
 		} else {
 			$('input[type=text]').val('');
+			$('.userAttempt').effect('shake');
 			return false
 			console.log('try again')
 		}

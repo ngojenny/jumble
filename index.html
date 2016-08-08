@@ -3,33 +3,19 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Jumble | Unscramble Words for Funsies</title>
-	<style>
-	.seconds {
-	     font-size: 350px;
-	     color:black;
-	     text-shadow:5px 5px 0 rgba(0,0,0,0.05);
-	     -webkit-transition:all 0.3s;
-    }
-	
-	.promptUser {
-		border: 2px solid red;
-		position: absolute;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%);
-	}
+	<link href='https://fonts.googleapis.com/css?family=Quicksand:400,700|Jacques+Francois' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="styles/style.css">
 
-	</style>
 </head>
 <body>
-	<div id="outPut">
+	<div class="output" id="outPut">
 		
 	</div>
 
 	<div id="answerKey"></div>
 
 	<form class="userAnswers" action="" id="userAnswersForm">
-		<input type="text">
+		<input type="text" class="userAttempt">
 	</form>
 
 	<button class="nxtBtn">Skip</button>
@@ -51,6 +37,7 @@
 	</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+	<script   src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"   integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="   crossorigin="anonymous"></script>
 	<script src="js/underscore-min.js"></script>
 	<script src="js/main.js"></script>
 </body>
