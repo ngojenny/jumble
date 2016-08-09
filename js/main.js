@@ -149,26 +149,15 @@ var usersScore = 0;
 //store users' answers in a variable
 //if users score matches answer key add points to their total
 jumbleApp.addPoints = function() {
-	var usersInput = $('input[type=text]').val();
-	var answerKeyDiv = document.getElementById('answerKey');
-	var answerKey = answerKeyDiv.innerHTML;
 	
 	usersScore = usersScore + 10;	
-	
-	console.log(usersInput);
 
 	jumbleApp.displayUsersScore(usersScore);
 }
 
 jumbleApp.subtractPoints = function() {
-	var usersInput = $('input[type=text]').val();
-	var answerKeyDiv = document.getElementById('answerKey');
-	var answerKey = answerKeyDiv.innerHTML;
-	
 	usersScore = usersScore - 5;	
 	
-	console.log(usersInput);
-
 	jumbleApp.displayUsersScore(usersScore);
 }
 
