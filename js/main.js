@@ -149,8 +149,23 @@ var usersScore = 0;
 //store users' answers in a variable
 //if users score matches answer key add points to their total
 jumbleApp.addPoints = function() {
+	/*level one words*/
+	if(scrambledWordsArrayIndex <= 7){
+		usersScore = usersScore + 10;
+	}
+	/*level two words*/
+	else if (scrambledWordsArrayIndex >= 13 <15) {
+		usersScore = usersScore + 15;
+	} 
+	/*level three words*/
+	else if (scrambledWordsArrayIndex >= 18 <20) {
+		usersScore = usersScore + 20;
+	}
+	/*level four words*/
+	else {
+		usersScore = usersScore + 25;
+	}
 	
-	usersScore = usersScore + 10;	
 
 	jumbleApp.displayUsersScore(usersScore);
 }
