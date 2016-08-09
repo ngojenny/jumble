@@ -13,17 +13,29 @@ jumbleApp.init = function() {
 
 var currentLevel = [];
 
-var levelOne = ['ketchup', 'grape', 'bread', 'apple', 'pickle', 'cider', 'cookies', 'chocolate', 'ramen', 'spinach', 'carrot', 'broccoli', 'pear', 'mango', 'eggs', 'pizza', 'mustard', 'candy', 'muffin', 'bacon', 'rice', 'kale'];
+var levelOne = ['ketchup', 'grape', 'bread', 'apple', 'pickle', 'cider', 'cookies'];
 
-// var levelTwo = ['usa', 'canada', 'spain', 'france', 'brazil', 'mexico'];
+// , 'chocolate', 'ramen', 'spinach', 'carrot', 'broccoli', 'pear', 'mango', 'eggs', 'pizza', 'mustard', 'candy', 'muffin', 'bacon', 'rice', 'kale'
 
-currentLevel = levelOne;
-console.log(currentLevel);
+var levelTwo = ['usa', 'canada', 'spain', 'france', 'brazil', 'mexico'];
+
+var levelThree = ['dress', 'tie', 'pants', 'tuxedo', 'overalls'];
+
+var levelFour = ['happy', 'sad', 'miserable', 'angry', 'silly']
+// currentLevel = levelOne;
+// console.log(currentLevel);
 
 
 //create a function that shuffles the array
 jumbleApp.jumbleWordArray = function() {
-	var shuffledArray = _.shuffle(currentLevel);
+	var shuffledLvlOne = _.shuffle(levelOne);
+	var shuffledLvlTwo = _.shuffle(levelTwo);
+	var shuffledLvlThree = _.shuffle(levelThree);
+	var shuffledLvlFour = _.shuffle(levelFour);
+
+	currentLevel = shuffledLvlOne.concat(shuffledLvlTwo, shuffledLvlThree, shuffledLvlFour);
+
+	var shuffledArray = currentLevel;
 	console.log(shuffledArray);
 
 	jumbleApp.shuffleCharacters(shuffledArray);
@@ -77,10 +89,19 @@ jumbleApp.nextJumbledPrompt = function(scrambledWordsArray) {
 	scrambledWordsArrayIndex = scrambledWordsArrayIndex + 1;
 	$('#outPut').empty();
 	$('#outPut').append(scrambledWordsArray[scrambledWordsArrayIndex]);
-	if(scrambledWordsArrayIndex === scrambledWordsArray.length){
+	jumbleApp.forceNextLevel();
+}
+
+jumbleApp.forceNextLevel = function(){
+	if(scrambledWordsArrayIndex === 7){
 		alert('congrats! ready for the next level?');
-		// currentLevel = levelTwo;
-		// jumbleApp.jumbleWordArray();
+		seconds = seconds + 20;
+	} else if (scrambledWordsArrayIndex === 13) {
+		alert('congrats! ready for the next level?');
+		seconds = seconds + 30;
+	} else if (scrambledWordsArrayIndex === 18) {
+		alert('congrats! ready for the next level?');
+		seconds = seconds + 30;
 	} else {
 
 	}
@@ -157,6 +178,8 @@ jumbleApp.displayUsersScore = function(usersScore) {
 	$('span.score').text(usersScore);
 }
 
+var seconds = 60;
+
 //create a 1 minute timer
 jumbleApp.onTimer = function() {
 	$('.playBtn').on('click', function(){
@@ -166,7 +189,6 @@ jumbleApp.onTimer = function() {
 			node.parentNode.removeChild(node);
 		}
 
-		var seconds = 60;
 		var countdown = window.setInterval(function(){
 			$('.seconds').html(seconds);
 			seconds = seconds - 1;
