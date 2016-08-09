@@ -13,7 +13,7 @@ jumbleApp.init = function() {
 
 var currentLevel = [];
 
-var levelOne = ['ketchup', 'grape', 'bread', 'apple', 'pickle', 'cider', 'cookies'];
+var levelOne = ['ketchup', 'grape', 'bread', 'apple', 'pickle', 'milk', 'cookies', 'mint', 'gum', 'candy', 'mango', 'pizza', 'muffin'];
 
 // , 'chocolate', 'ramen', 'spinach', 'carrot', 'broccoli', 'pear', 'mango', 'eggs', 'pizza', 'mustard', 'candy', 'muffin', 'bacon', 'rice', 'kale'
 
@@ -93,15 +93,21 @@ jumbleApp.nextJumbledPrompt = function(scrambledWordsArray) {
 }
 
 jumbleApp.forceNextLevel = function(){
-	if(scrambledWordsArrayIndex === 7){
+	var addOneTwo = levelOne.length + levelTwo.length;
+
+	var addOneTwoThree = levelOne.length + levelTwo.length + levelThree.length;
+
+	if(scrambledWordsArrayIndex === levelOne.length){
+		alert('congrats! ready for the next level?');
+		seconds = seconds + 10;
+	
+	} else if (scrambledWordsArrayIndex === addOneTwo) {
 		alert('congrats! ready for the next level?');
 		seconds = seconds + 20;
-	} else if (scrambledWordsArrayIndex === 13) {
+
+	} else if (scrambledWordsArrayIndex === addOneTwoThree) {
 		alert('congrats! ready for the next level?');
-		seconds = seconds + 30;
-	} else if (scrambledWordsArrayIndex === 18) {
-		alert('congrats! ready for the next level?');
-		seconds = seconds + 30;
+		console.log('hit4')
 	} else {
 
 	}
