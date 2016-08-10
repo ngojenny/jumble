@@ -97,20 +97,35 @@ jumbleApp.forceNextLevel = function(){
 
 	var addOneTwoThree = levelOne.length + levelTwo.length + levelThree.length;
 
+	var dynamPara = document.getElementById('dynamic');
+	// var dynamPara2 = document.getElementById('dynamic2')
+
 	if(scrambledWordsArrayIndex === levelOne.length){
-		alert('congrats! ready for the next level?');
+		dynamPara.innerHTML = "YAAS! Level One completed. Get ready for level two Psst... they're all countries";
+
+		$('.nextLvlPrompt').addClass('show');
+
 		seconds = seconds + 10;
 	
 	} else if (scrambledWordsArrayIndex === addOneTwo) {
-		alert('congrats! ready for the next level?');
+		dynamPara.innerHTML = "YAAS! Level One completed. Get ready for level three Psst... they're all types of clothing";
+
+		$('.nextLvlPrompt').addClass('show');
+		// alert('congrats! ready for the next level?');
 		seconds = seconds + 20;
 
 	} else if (scrambledWordsArrayIndex === addOneTwoThree) {
-		alert('congrats! ready for the next level?');
-		console.log('hit4')
+		dynamPara.innerHTML = "YAAS! Level One completed. Get ready for level three Psst... they're all types of clothing";
+
+		$('.nextLvlPrompt').addClass('show');
+		// alert('congrats! ready for the next level?');
 	} else {
 
 	}
+
+	$('.nxtLvlBtn').on('click', function(){
+		$('.nextLvlPrompt').removeClass('show');
+	});
 }
 
 var shuffledArrayIndex = 0;
@@ -194,6 +209,7 @@ var seconds = 60;
 jumbleApp.onTimer = function() {
 	$('.playBtn').on('click', function(){
 		// jumbleApp.onTimer();
+		var dynamPara = document.getElementById('dynamic');
 		var node = document.getElementById('promptUser');
 		if(node.parentNode) {
 			node.parentNode.removeChild(node);
@@ -204,7 +220,9 @@ jumbleApp.onTimer = function() {
 			seconds = seconds - 1;
 			if(seconds < 0) {
 				window.clearInterval(countdown);
-				// alert('Times Up!');
+				dynamPara.innerHTML = "Game Over";
+
+				$('.nextLvlPrompt').addClass('show');
 			}
 		}, 1000);
 	});

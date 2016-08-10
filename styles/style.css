@@ -24,12 +24,17 @@ body {
 }
 
 /* PROMPT USER BOX */
-.promptUser {
+.promptUser,
+.nextLvlPrompt {
 	border: 2px solid red;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+.nextLvlPrompt {
+	display: none;
 }
 
 /* JUMBLED PROMPT */
@@ -39,6 +44,14 @@ body {
 	font-weight: 700;
 	letter-spacing: 15px;
 	text-transform: uppercase;
+}
+
+.hide {
+	display: none;
+}
+
+.nextLvlPrompt.show {
+	display: block;
 }
 
 /*#answerKey {
